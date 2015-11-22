@@ -1,7 +1,7 @@
 ## Welcome
 This project is an attempt to create a node.js application which emulates the functionality of the [Elk M1EXP Ethernet Expander](http://www.elkproducts.com/product-catalog/elk-m1xep-m1-ethernet-interface) for the Elk M1 series of alarm panels. 
 
-![No Elk M1EXP](http:///billchurch.github.io/images/M1XEP.png)
+![No Elk M1EXP](http://billchurch.github.io/images/M1XEP.png)
 
 ## Why?
 Well, for one the M1EXP is pretty long in the tooth. It's also fairly expensive for what it is. Devices for a fraction of the cost can do what it does, and more which is my main purpose for replacing it.
