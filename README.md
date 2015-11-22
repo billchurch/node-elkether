@@ -39,6 +39,8 @@ The intention of this project is to augment home automation and entertainment sy
 ## Project Status
 If you're reading this, I just set the site up, nothing's been done except for experimenting with "socat".
 
+Check the [Wiki](https://github.com/billchurch/node-elkether/wiki), I'll be using it as a place to hold my experiments and what not while I get some code up here.
+
 ## General Architecture
 Intended to run on a small, lower power device like a Raspberry Pi. At this point the overall software architecture will consist of some web services and a web socket which interfaces the actual serial port. All communications from clients will ultimately converge on the web socket with the intent that this will help multiplex the serial port communication to multiple listeners, transmitters, subscribers, what have you. This is considered to be a bus topology everyone hears and sees everything. 
 
