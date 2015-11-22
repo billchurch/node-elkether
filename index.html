@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Node-elkether by billchurch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Node-elkether</h1>
+      <h2 class="project-tagline">A project to create a node-js version of the Elk M1EXP Ethernet Expander</h2>
+      <a href="https://github.com/billchurch/node-elkether" class="btn">View on GitHub</a>
+      <a href="https://github.com/billchurch/node-elkether/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/billchurch/node-elkether/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="welcome" class="anchor" href="#welcome" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome</h2>
+
+<p>This project is an attempt to create a node.js application which emulates the functionality of the <a href="http://www.elkproducts.com/product-catalog/elk-m1xep-m1-ethernet-interface">Elk M1EXP Ethernet Expander</a> for the Elk M1 series of alarm panels. </p>
+
+<h2>
+<a id="why" class="anchor" href="#why" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why?</h2>
+
+<p>Well, for one the M1EXP is pretty long in the tooth. It's also fairly expensive for what it is. Devices for a fraction of the cost can do what it does, and more which is my main purpose for replacing it.</p>
+
+<p>There is one caveat to all of this, if you're concerned about UL certification know that using something other than the Elk M1EXP will likely invalidate any UL certifications so you are doing this at your own risks and understand there is a potential for property damage or loss of life. This project is not meant to be a turn-key solution and any support is considered best-effor at the most.</p>
+
+<h2>
+<a id="goals" class="anchor" href="#goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goals</h2>
+
+<h3>
+<a id="short-term" class="anchor" href="#short-term" aria-hidden="true"><span class="octicon octicon-link"></span></a>Short Term</h3>
+
+<ul>
+<li>Emulate "Non-Secure Port" functionality (tcp/2101)</li>
+<li>Emulate "Secure Port" functionality (tcp/2601) tls1</li>
+<li>Emulate web access
+** instead of a Java application use standards based HTML over HTTPS.</li>
+<li>Capable of running on a Raspberry Pi or equivalent (any model)</li>
+</ul>
+
+<h3>
+<a id="long-term" class="anchor" href="#long-term" aria-hidden="true"><span class="octicon octicon-link"></span></a>Long Term</h3>
+
+<ul>
+<li>Extend to provide a simple REST API interface</li>
+<li>Configurable ciphers</li>
+<li>Enhanced access control lists</li>
+<li>Client Certificate Authentication (why not)</li>
+</ul>
+
+<h2>
+<a id="project-status" class="anchor" href="#project-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Status</h2>
+
+<p>If you're reading this, I just set the site up, nothing's been done except for experimenting with "socat".</p>
+
+<h2>
+<a id="general-architecture" class="anchor" href="#general-architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Architecture</h2>
+
+<p>Intended to run on a small, lower power device like a Raspberry Pi. At this point the overall software architecture will consist of some web services and a web socket which interfaces the actual serial port. All communications from clients will ultimately converge on the web socket with the intent that this will help multiplex the serial port communication to multiple listeners, transmitters, subscribers, what have you. This is considered to be a bus topology everyone hears and sees everything. </p>
+
+<p>There are certain events, as when <a href="http://www.elkproducts.com/product-catalog/elkrp2-remote-programming-software">ElkRP2</a> connects to program the panel, which must allow for a dedicated session. We'll want to figure out the best way to handle these lock events and ensure compatibility with ElkRP2.</p>
+
+<h3>
+<a id="software-stack" class="anchor" href="#software-stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Software Stack</h3>
+
+<p>Mirroring the <a href="https://github.com/lowpowerlab" class="user-mention">@lowpowerlab</a>'s approach to his Home Automation Gateway</p>
+
+<ul>
+<li>nginx 1.8</li>
+<li>Node.js
+** Socket.IO
+** node-serialport</li>
+<li>php? Maybe, not sure yet. I don't think we'll need it but it'll be there just in case</li>
+<li>some yet to be determined framework to make things pretty (low priority)</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/billchurch/node-elkether">Node-elkether</a> is maintained by <a href="https://github.com/billchurch">billchurch</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
