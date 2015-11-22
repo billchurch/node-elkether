@@ -48,7 +48,7 @@ There are certain events, as when [ElkRP2](http://www.elkproducts.com/product-ca
 Mirroring the @lowpowerlab's approach to his Home Automation Gateway
 * nginx 1.8
 * Node.js
-** Socket.IO
-** node-serialport
+ * Socket.IO
+ * node-serialport
 * php? Maybe, not sure yet. I don't think we'll need it but it'll be there just in case
 * some yet to be determined framework to make things pretty (low priority)
