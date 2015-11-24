@@ -5,62 +5,69 @@ var SERVER_PORT = 8081;               // port number for the webSocket server
 var wss = new WebSocketServer({port: SERVER_PORT}); // the webSocket server
 var connections = new Array;          // list of webSocket connections to the server
 
-   SerialPort = serialport.SerialPort; // make a local instance of it
-   // get port name from the command line:
-   portName = process.argv[2];
+SerialPort = serialport.SerialPort; // make a local instance of it
+// get port name from the command line:
+portName = process.argv[2];
 
 var myPort = new SerialPort(portName, {
-   baudRate: 115200,
-   // look for return and newline at the end of each data packet:
-   parser: serialport.parsers.readline("\n")
- });
+  baudRate: 115200,
+  // look for return and newline at the end of each data packet:
+  parser: serialport.parsers.readline("\n")
+});
 
- function showPortOpen() {
-    console.log('port open. Data rate: ' + myPort.options.baudRate);
- }
+function showPortOpen() {
+  console.log('port open. Data rate: ' + myPort.options.baudRate);
+}
 
- function sendSerialData(data) {
-    console.log('[' + Date.now() + '] < ' + data);
-    // if there are webSocket connections, send the serial data
-    // to all of them:
-    if (connections.length > 0) {
-      broadcast(data);
-    }
+function sendSerialData(data) {
+  console.log('[' + Date.now() + '] < ' + data);
+  // if there are webSocket connections, send the serial data
+  // to all of them:
+  if (connections.length > 0) {
+    broadcast(data);
+  }
+  var messageType = data.toString('ascii').substring(2, 4);
+  // for future use to answer any messageTypes we might need to be
+  // responsible for
+  switch(messageType) {
+    case 'XK': // Elk M1 requesting Ethernet status
+      sendToSerial("06xk0057"); // send I'm ok heartbeat
+      break;
+  }
+}
 
- }
+function showPortClose() {
+  console.log('port closed.');
+}
 
- function showPortClose() {
-    console.log('port closed.');
- }
+function showError(error) {
+  console.log('Serial port error: ' + error);
+}
 
- function showError(error) {
-    console.log('Serial port error: ' + error);
- }
-
- function sendToSerial(data) {
+function sendToSerial(data) {
   console.log('[' + Date.now() + '] > ' + data);
   myPort.write(data + "\r\n");
- }
+}
 
- function handleConnection(client) {
+function handleConnection(client) {
   console.log("New Connection"); // you have a new client
   connections.push(client); // add this client to the connections array
 
   client.on('message', sendToSerial); // when a client sends a message,
 
   client.on('close', function() { // when a client closes its connection
-  console.log("connection closed"); // print it out
-  var position = connections.indexOf(client); // get the client's position in the array
-  connections.splice(position, 1); // and delete it from the array
+    console.log("connection closed"); // print it out
+    var position = connections.indexOf(client); // get the client's position in the array
+    connections.splice(position, 1); // and delete it from the array
   });
- }
+}
 
- // This function broadcasts messages to all webSocket clients
- function broadcast(data) {
+// This function broadcasts messages to all webSocket clients
+function broadcast(data) {
   for (myConnection in connections) {   // iterate over the array of connections
-   connections[myConnection].send(data); // send the data to each connection
+    connections[myConnection].send(data); // send the data to each connection
   }
- }
+}
 
 myPort.on('open', showPortOpen);
 myPort.on('data', sendSerialData);

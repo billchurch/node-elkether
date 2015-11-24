@@ -49,7 +49,7 @@ $(document).ready(function() {
                   return ;
               }
               try{
-                  socket.send(text);
+                  socket.send(text+'\r\n');
                   var timestamp = '[' + Date.now() + '] ';
                   message('<p class="event">' + timestamp + '\> '+text)
 
