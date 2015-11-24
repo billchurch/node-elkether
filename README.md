@@ -13,7 +13,7 @@ Another example, what the hell is tcp/26? Is it really rsftp? What's that thing 
 
 
 ## Disclaimer
-By using any code from this project you are doing so at your own risk and understand there exists the potential where product failure could lead to injury of persons, loss of life, or catastrophic property damage.n
+By using any code from this project you are doing so at your own risk and understand there exists the potential where product failure could lead to injury of persons, loss of life, or catastrophic property damage.
 
 This project is not meant to be a turn-key solution and any support is considered best-effort.
 
