@@ -13,7 +13,7 @@ Another example, what the hell is tcp/26? Is it really rsftp? What's that thing 
 
 
 ## Disclaimer
-By using any code from this project you are doing so at your own risk and understand there exists the potential where product failure could lead to injury of persons, loss of life, or catastrophic property damage.
+By using any code from this project you are doing so at your own risk and understand there exists the potential where product failure could lead to injury of persons, loss of life, or catastrophic property damage.n
 
 This project is not meant to be a turn-key solution and any support is considered best-effort.
 
@@ -37,7 +37,7 @@ The intention of this project is to augment home automation and entertainment sy
 * Client Certificate Authentication (why not)
 
 ## Project Status
-So far we have a prototype webserivce working and a webclient to go with it. We can talk to the Elk M1 panel over webSockets, that's kind of cool. I've also worked on a rough architecture diagram of how all the parts/processes will fit together:
+So far we have a prototype webserivce working and a web client and a tcp/2101 socket interface to go with it. We can talk to the Elk M1 panel over webSockets, that's kind of cool, and any 3rd party tool that can use the tcp/2101 port can now talk to the Alarm panel (tested with [Indigo 6](https://www.indigodomo.com/)). I've also worked on a rough architecture diagram of how all the parts/processes will fit together:
 
 ![Architecture Diagram](https://raw.githubusercontent.com/billchurch/node-elkether/master/images/node-elkether-architecture.png)
 
