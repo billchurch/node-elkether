@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<title>elkether webSocket Client</title>
+<!-- this was pretty much lifted from http://code.tutsplus.com/tutorials/start-using-html5-websockets-today--net-13270 -->
+<!-- made a few changes here or there but it's essentially their code for this part -->
+<script type="text/javascript">
+$(document).ready(function() {
+
+  if(!("WebSocket" in window)){
+  $('#log, input, button, #examples').fadeOut("fast");
+  $('<p>Oh no, you need a browser that supports WebSockets. How about <a href="http://www.google.com/chrome">Google Chrome</a>?</p>').appendTo('#container');
+  }else{
+      //The user has WebSockets
+      connect();
+
+      function connect(){
+          var socket;
+          var host = "ws://192.168.0.5:8081";
+
+          try{
+              var socket = new WebSocket(host);
+
+              message('<p class="event">Socket Status: '+socket.readyState);
+
+              socket.onopen = function(){
+             	 message('<p class="event">Socket Status: '+socket.readyState+' (open)');
+              }
+
+              socket.onmessage = function(msg){
+                var timestamp = '[' + Date.now() + '] ';
+                message('<p class="message">' + timestamp + '\< '+msg.data);
+              }
+
+              socket.onclose = function(){
+              	message('<p class="event">Socket Status: '+socket.readyState+' (Closed)');
+              }
+
+          } catch(exception){
+             message('<p>Error'+exception);
+          }
+
+          function send(){
+              var text = $('#text').val();
+
+              if(text==""){
+                  message('<p class="warning">Please enter a message');
+                  return ;
+              }
+              try{
+                  socket.send(text);
+                  var timestamp = '[' + Date.now() + '] ';
+                  message('<p class="event">' + timestamp + '\> '+text)
+
+              } catch(exception){
+                 message('<p class="warning">');
+              }
+              $('#text').val("");
+          }
+
+          function message(msg){
+            $('#log').append(msg+'</p>');
+          }
+
+          $('#text').keypress(function(event) {
+              if (event.keyCode == '13') {
+                send();
+              }
+          });
+
+          $('#send').click(function(){
+            send();
+          });
+
+          $('#disconnect').click(function(){
+             socket.close();
+          });
+      }//End connect
+
+  }//End else
+
+});
+</script>
+<style>
+body {
+    font-family:Helvetica, Arial, sans-serif;
+}
+#container{
+    border:5px solid grey;
+    width:800px;
+    margin:0 auto;
+    padding:10px;
+}
+#log{
+    padding:5px;
+    border:1px solid black;
+}
+#log p {
+    margin:0;
+}
+.event {
+    color:#999;
+}
+.warning{
+    font-weight:bold;
+    color:#CCC;
+}
+</style>
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="container">
+        <h1>elkether webSocket test Client</h1>
+        <div id="log">
+        </div>
+        <p id="examples">Examples:
+        <br/>'06xk0057' (Ethernet Test Ack)
+        <br/>'06rr0056' (Request Real Time Clock Data)
+        <br/>'06vn0056' (Request M1 Version Number)</p>
+        <input id="text" type="text" />
+        <button id="send">Send</button>
+        <button id="disconnect">Disconnect</button>
+    </div>
+</div>
+</body>
+</html>
