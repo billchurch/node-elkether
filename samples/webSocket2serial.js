@@ -20,7 +20,7 @@ var myPort = new SerialPort(portName, {
  }
 
  function sendSerialData(data) {
-    console.log(data);
+    console.log('[' + Date.now() + '] < ' + data);
     // if there are webSocket connections, send the serial data
     // to all of them:
     if (connections.length > 0) {
@@ -38,7 +38,7 @@ var myPort = new SerialPort(portName, {
  }
 
  function sendToSerial(data) {
-  console.log("sending to serial: " + data);
+  console.log('[' + Date.now() + '] > ' + data);
   myPort.write(data + "\r\n");
  }
 
