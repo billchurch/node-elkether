@@ -37,7 +37,9 @@ The intention of this project is to augment home automation and entertainment sy
 * Client Certificate Authentication (why not)
 
 ## Project Status
-If you're reading this, I just set the site up, nothing's been done except for experimenting with "socat".
+So far we have a prototype webserivce working and a webclient to go with it. We can talk to the Elk M1 panel over webSockets, that's kind of cool. I've also worked on a rough architecture diagram of how all the parts/processes will fit together:
+
+![Architecture Diagram](https://raw.githubusercontent.com/billchurch/node-elkether/master/images/node-elkether-architecture.png)
 
 Check the [Wiki](https://github.com/billchurch/node-elkether/wiki), I'll be using it as a place to hold my experiments and what not while I get some code up here.
 
